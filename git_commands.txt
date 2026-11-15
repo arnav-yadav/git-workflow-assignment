@@ -153,3 +153,23 @@ git diff --cached --stat
 
 git log -3 --oneline
   Inspect the latest three commits before resuming the publishing record.
+
+REPOSITORY RENAME COMMANDS
+
+The original creation commands above record the name used at that time.
+Current public repository: https://github.com/arnav-yadav/git-workflow-assignment
+
+gh repo rename git-workflow-assignment --repo arnav-yadav/git-workflow-assignment-20261115 --yes
+  Rename the existing public GitHub repository to the requested shorter name; its commits and branches are retained.
+
+gh repo view arnav-yadav/git-workflow-assignment --json nameWithOwner,url,isPrivate,defaultBranchRef
+  Verify the renamed repository's URL, public visibility, and main default branch.
+
+git remote set-url origin https://github.com/arnav-yadav/git-workflow-assignment.git
+  Update origin to the renamed GitHub repository's URL.
+
+git add README.md git_commands.txt evidence/repository_rename.txt
+  Stage the updated repository link, command documentation, and actual rename evidence.
+
+git commit -m 'Rename GitHub repository to git-workflow-assignment'
+  Record the repository-name and remote-URL update while preserving the earlier workflow commits.

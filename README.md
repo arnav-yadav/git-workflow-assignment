@@ -28,7 +28,7 @@ remain available to an instructor reviewing the history.
 
 ## GitHub status
 
-Public repository: https://github.com/arnav-yadav/git-workflow-assignment-20261115
+Public repository: https://github.com/arnav-yadav/git-workflow-assignment
 
 Public visibility, default branch main, and matching remote main and feature hashes
 were verified. Initial publishing output is in evidence/github_integration.txt.

@@ -1,0 +1,70 @@
+REPOSITORY RENAME EVIDENCE
+Actual rename and visibility checks, captured before the documentation commit.
+The final pushed branch hashes appear in the regenerated PDF.
+
+$ git status --short --branch
+## main...origin/main
+[exit code: 0]
+
+$ git status --porcelain=v1
+
+[exit code: 0]
+
+$ git rev-parse main
+c6f5a89cb6a9475d87191426be8f6463bb378a17
+[exit code: 0]
+
+$ git rev-parse feature
+8f33cae32161a4bc6ca9fbd3e00b2815fc42aa7b
+[exit code: 0]
+
+$ gh api user --jq .login
+error connecting to api.github.com
+check your internet connection or https://githubstatus.com
+[exit code: 1]
+
+$ git status --short --branch
+## main...origin/main
+[exit code: 0]
+
+$ git status --porcelain=v1
+
+[exit code: 0]
+
+$ git rev-parse main
+c6f5a89cb6a9475d87191426be8f6463bb378a17
+[exit code: 0]
+
+$ git rev-parse feature
+8f33cae32161a4bc6ca9fbd3e00b2815fc42aa7b
+[exit code: 0]
+
+$ gh api user --jq .login
+arnav-yadav
+[exit code: 0]
+
+$ gh repo view arnav-yadav/git-workflow-assignment-20261115 --json nameWithOwner,url,isPrivate,defaultBranchRef
+{"defaultBranchRef":{"name":"main"},"isPrivate":false,"nameWithOwner":"arnav-yadav/git-workflow-assignment-20261115","url":"https://github.com/arnav-yadav/git-workflow-assignment-20261115"}
+[exit code: 0]
+
+$ gh repo rename git-workflow-assignment --repo arnav-yadav/git-workflow-assignment-20261115 --yes
+
+[exit code: 0]
+
+$ gh repo view arnav-yadav/git-workflow-assignment --json nameWithOwner,url,isPrivate,defaultBranchRef
+{"defaultBranchRef":{"name":"main"},"isPrivate":false,"nameWithOwner":"arnav-yadav/git-workflow-assignment","url":"https://github.com/arnav-yadav/git-workflow-assignment"}
+[exit code: 0]
+
+$ git remote set-url origin https://github.com/arnav-yadav/git-workflow-assignment.git
+
+[exit code: 0]
+
+$ git ls-remote --heads origin main feature
+8f33cae32161a4bc6ca9fbd3e00b2815fc42aa7b	refs/heads/feature
+c6f5a89cb6a9475d87191426be8f6463bb378a17	refs/heads/main
+[exit code: 0]
+
+$ git remote -v
+origin	https://github.com/arnav-yadav/git-workflow-assignment.git (fetch)
+origin	https://github.com/arnav-yadav/git-workflow-assignment.git (push)
+[exit code: 0]
