@@ -1,0 +1,139 @@
+GIT COMMANDS USED IN THE ASSIGNMENT
+Project: git-workflow-assignment
+Commands were run inside this folder unless stated otherwise.
+Repeated commands are listed once; the evidence transcript records their sequence.
+
+EXECUTED LOCAL GIT COMMANDS
+
+1. git init -b main
+   Initialize this existing local project as a Git repository, with main as its initial branch.
+
+2. git add index.html about.html
+   Stage the specified files for the next commit.
+
+3. git diff --cached --check
+   Check staged changes for whitespace errors before committing.
+
+4. git commit -m 'Initial commit: add home and about pages'
+   Record the staged project changes with a descriptive commit message.
+
+5. git diff -- index.html
+   Display the home-page change before staging the second commit.
+
+6. git add index.html
+   Stage the specified files for the next commit.
+
+7. git commit -m 'Update home page introduction'
+   Record the staged project changes with a descriptive commit message.
+
+8. git branch feature
+   Create a feature branch at the current commit; this command does not switch branches.
+
+9. git switch feature
+   Switch the working tree to the feature branch.
+
+10. git diff -- about.html
+   Display the changes made on the feature branch.
+
+11. git add about.html
+   Stage the specified files for the next commit.
+
+12. git commit -m 'Add Git learning goals on feature branch'
+   Record the staged project changes with a descriptive commit message.
+
+13. git switch main
+   Return to main before merging the feature branch.
+
+14. git status --short
+   Check that the working tree has no uncommitted changes.
+
+15. git merge --no-ff feature -m 'Merge feature branch into main'
+   Merge feature into main and create an explicit merge commit so branch activity remains visible.
+
+16. git log --oneline --graph --all --decorate
+   Show commit history, branch labels, and the branch-and-merge graph.
+
+17. git check-ignore -v debug.log temp/cache.txt
+   Verify that the .log file and the temp folder are ignored, and show which rules match them.
+
+18. git status --short --ignored
+   Show ignored files with !! while confirming .gitignore is an untracked file before it is staged.
+
+19. git add .gitignore
+   Stage the specified files for the next commit.
+
+20. git commit -m 'Ignore log files and temp folder'
+   Record the staged project changes with a descriptive commit message.
+
+21. git commit -m 'Add temporary notice for undo demonstration'
+   Record the staged project changes with a descriptive commit message.
+
+22. git show --format=oneline -- index.html
+   Show the additional commit and the temporary paragraph it added.
+
+23. git revert --no-edit HEAD
+   Undo the last commit by creating a new reversal commit, preserving history for GitHub verification.
+
+24. git log -2 --oneline
+   Show the original temporary-change commit and its subsequent revert together.
+
+25. git diff --exit-code 'HEAD~2' HEAD -- index.html
+   Verify that the restored home page exactly matches its content before the additional commit; exit 0 and no output indicate equality.
+
+26. git status --short --branch
+   Show the current branch and verify that the working tree is clean after the revert.
+
+27. git add README.md git_commands.txt login_test_cases.csv evidence/git_workflow.txt
+   Stage the command documentation, test cases, and captured evidence for inclusion in the repository.
+
+28. git commit -m 'Document Git commands, evidence, and login test cases'
+   Commit the documentation after completing the undo demonstration.
+
+29. git log --all --format=%H%x09%P%x09%s
+   Read commit hashes, parent hashes, and subjects to verify that the history contains the required commits and a two-parent merge.
+
+30. git ls-files
+   List tracked files to verify that the required project and documentation files are committed, and ignored examples are excluded.
+
+31. git status --porcelain=v1
+   Verify that no uncommitted or untracked non-ignored files remain; an empty result indicates a clean working tree.
+
+32. git show HEAD~1:index.html
+   Read the home page from the revert commit to verify that the temporary paragraph is absent.
+
+33. git show HEAD~2:index.html
+   Read the home page from the additional commit to verify that the temporary paragraph was present before the revert.
+
+34. git show HEAD~3:index.html
+   Read the home page from before the additional commit, and compare it with the reverted content.
+
+35. git rev-parse main
+   Read the main branch tip for local and eventual remote verification.
+
+36. git rev-parse feature
+   Read the feature branch tip to verify that this branch is retained and can also be pushed.
+
+GITHUB INTEGRATION: PENDING
+The GitHub API is unreachable from this session. The commands below are prepared
+for execution from an authenticated terminal; they are not claimed as successful.
+
+P1. gh repo create arnav-yadav/git-workflow-assignment-20261115 --public --description 'Git workflow assignment and login-system test case design'
+    Create an empty PUBLIC GitHub repository only after the local repository and its history exist. gh is GitHub CLI, not a Git command.
+
+P2. git remote add origin https://github.com/arnav-yadav/git-workflow-assignment-20261115.git
+    Connect the local repository to the new GitHub repository using the origin remote.
+
+P3. git push -u origin main
+    Push main and all commits reachable from it; -u sets its upstream tracking branch.
+
+P4. git push -u origin feature
+    Push the retained feature branch so the branch name is visible on GitHub as well.
+
+P5. git remote -v
+    Display the configured GitHub fetch and push URLs.
+
+P6. git ls-remote --heads origin main feature
+    Read the remote branch hashes and verify that they match the local main and feature branch tips.
+
+P7. gh repo view arnav-yadav/git-workflow-assignment-20261115 --json nameWithOwner,url,isPrivate,defaultBranchRef
+    Verify the published repository URL, that isPrivate is false, and that the default branch is main. gh is GitHub CLI.

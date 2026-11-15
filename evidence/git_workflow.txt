@@ -1,0 +1,206 @@
+AUTHENTIC LOCAL COMMAND OUTPUT
+This transcript covers setup through the completed revert.
+The documentation commit is subsequently visible in git log.
+
+$ git init -b main
+Initialized empty Git repository in /Users/arnav/claudemasti/git-workflow-assignment/.git/
+[exit code: 0]
+
+$ git add index.html about.html
+
+[exit code: 0]
+
+$ git diff --cached --check
+
+[exit code: 0]
+
+$ git commit -m 'Initial commit: add home and about pages'
+[main (root-commit) 2449331] Initial commit: add home and about pages
+ 2 files changed, 35 insertions(+)
+ create mode 100644 about.html
+ create mode 100644 index.html
+[exit code: 0]
+
+$ git diff -- index.html
+diff --git a/index.html b/index.html
+index 87b2925..b26bc45 100644
+--- a/index.html
++++ b/index.html
+@@ -12,7 +12,7 @@
+   </header>
+   <main>
+     <h2>Welcome</h2>
+-    <p>This website demonstrates a local Git workflow.</p>
++    <p>This website demonstrates commits, branching, merging, and safe undo operations.</p>
+   </main>
+ </body>
+ </html>
+[exit code: 0]
+
+$ git add index.html
+
+[exit code: 0]
+
+$ git diff --cached --check
+
+[exit code: 0]
+
+$ git commit -m 'Update home page introduction'
+[main a533843] Update home page introduction
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+[exit code: 0]
+
+$ git branch feature
+
+[exit code: 0]
+
+$ git switch feature
+Switched to branch 'feature'
+[exit code: 0]
+
+$ git diff -- about.html
+diff --git a/about.html b/about.html
+index 85c2f02..f9c48a8 100644
+--- a/about.html
++++ b/about.html
+@@ -12,6 +12,14 @@
+   </header>
+   <main>
+     <p>A two-page website for practicing version control with Git.</p>
++    <section>
++      <h2>Learning Goals</h2>
++      <ul>
++        <li>Track project changes with meaningful commits.</li>
++        <li>Develop changes on a separate branch.</li>
++        <li>Merge completed work into the main branch.</li>
++      </ul>
++    </section>
+   </main>
+ </body>
+ </html>
+[exit code: 0]
+
+$ git add about.html
+
+[exit code: 0]
+
+$ git diff --cached --check
+
+[exit code: 0]
+
+$ git commit -m 'Add Git learning goals on feature branch'
+[feature 8f33cae] Add Git learning goals on feature branch
+ 1 file changed, 8 insertions(+)
+[exit code: 0]
+
+$ git switch main
+Switched to branch 'main'
+[exit code: 0]
+
+$ git status --short
+
+[exit code: 0]
+
+$ git merge --no-ff feature -m 'Merge feature branch into main'
+Merge made by the 'ort' strategy.
+ about.html | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+[exit code: 0]
+
+$ git log --oneline --graph --all --decorate
+*   2442357 (HEAD -> main) Merge feature branch into main
+|\
+| * 8f33cae (feature) Add Git learning goals on feature branch
+|/
+* a533843 Update home page introduction
+* 2449331 Initial commit: add home and about pages
+[exit code: 0]
+
+$ git check-ignore -v debug.log temp/cache.txt
+.gitignore:1:*.log	debug.log
+.gitignore:2:temp/	temp/cache.txt
+[exit code: 0]
+
+$ git status --short --ignored
+?? .gitignore
+!! debug.log
+!! temp/
+[exit code: 0]
+
+$ git add .gitignore
+
+[exit code: 0]
+
+$ git diff --cached --check
+
+[exit code: 0]
+
+$ git commit -m 'Ignore log files and temp folder'
+[main d1dfa01] Ignore log files and temp folder
+ 1 file changed, 2 insertions(+)
+ create mode 100644 .gitignore
+[exit code: 0]
+
+$ git add index.html
+
+[exit code: 0]
+
+$ git diff --cached --check
+
+[exit code: 0]
+
+$ git commit -m 'Add temporary notice for undo demonstration'
+[main d9dae50] Add temporary notice for undo demonstration
+ 1 file changed, 1 insertion(+)
+[exit code: 0]
+
+$ git show --format=oneline -- index.html
+d9dae505c6c6178aebb027114993995c0789f99e Add temporary notice for undo demonstration
+diff --git a/index.html b/index.html
+index b26bc45..4555e32 100644
+--- a/index.html
++++ b/index.html
+@@ -13,6 +13,7 @@
+   <main>
+     <h2>Welcome</h2>
+     <p>This website demonstrates commits, branching, merging, and safe undo operations.</p>
++    <p id="temporary-note">Temporary notice: this change will be undone.</p>
+   </main>
+ </body>
+ </html>
+[exit code: 0]
+
+$ git revert --no-edit HEAD
+[main 6863f16] Revert "Add temporary notice for undo demonstration"
+ Date: Sun Nov 15 19:15:13 2026 +0530
+ 1 file changed, 1 deletion(-)
+[exit code: 0]
+
+$ git show --format=oneline -- index.html
+6863f16a77efb558d0bcd09074f14b2076f31f62 Revert "Add temporary notice for undo demonstration"
+diff --git a/index.html b/index.html
+index 4555e32..b26bc45 100644
+--- a/index.html
++++ b/index.html
+@@ -13,7 +13,6 @@
+   <main>
+     <h2>Welcome</h2>
+     <p>This website demonstrates commits, branching, merging, and safe undo operations.</p>
+-    <p id="temporary-note">Temporary notice: this change will be undone.</p>
+   </main>
+ </body>
+ </html>
+[exit code: 0]
+
+$ git log -2 --oneline
+6863f16 Revert "Add temporary notice for undo demonstration"
+d9dae50 Add temporary notice for undo demonstration
+[exit code: 0]
+
+$ git diff --exit-code 'HEAD~2' HEAD -- index.html
+
+[exit code: 0]
+
+$ git status --short --branch
+## main
+[exit code: 0]
