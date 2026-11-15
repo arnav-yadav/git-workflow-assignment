@@ -28,11 +28,7 @@ remain available to an instructor reviewing the history.
 
 ## GitHub status
 
-Publishing is pending because this session cannot reach GitHub's API.
-Planned repository: https://github.com/arnav-yadav/git-workflow-assignment-20261115
-This is a target URL, not a verified public repository.
+Public repository: https://github.com/arnav-yadav/git-workflow-assignment-20261115
 
-From the parent folder, run `python3 assignment-support/publish_github.py` in an
-authenticated terminal with network access. It creates an empty public repository,
-adds origin, pushes main and feature, verifies both remote branch hashes and public
-visibility, and updates the PDF to reflect only the verified result.
+Public visibility, default branch main, and matching remote main and feature hashes
+were verified. Initial publishing output is in evidence/github_integration.txt.

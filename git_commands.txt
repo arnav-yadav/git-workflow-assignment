@@ -113,9 +113,9 @@ EXECUTED LOCAL GIT COMMANDS
 36. git rev-parse feature
    Read the feature branch tip to verify that this branch is retained and can also be pushed.
 
-GITHUB INTEGRATION: PENDING
-The GitHub API is unreachable from this session. The commands below are prepared
-for execution from an authenticated terminal; they are not claimed as successful.
+GITHUB INTEGRATION: EXECUTED AND VERIFIED
+The repository was created public, both branches were pushed, and remote hashes
+and public visibility were verified.
 
 P1. gh repo create arnav-yadav/git-workflow-assignment-20261115 --public --description 'Git workflow assignment and login-system test case design'
     Create an empty PUBLIC GitHub repository only after the local repository and its history exist. gh is GitHub CLI, not a Git command.
@@ -137,3 +137,19 @@ P6. git ls-remote --heads origin main feature
 
 P7. gh repo view arnav-yadav/git-workflow-assignment-20261115 --json nameWithOwner,url,isPrivate,defaultBranchRef
     Verify the published repository URL, that isPrivate is false, and that the default branch is main. gh is GitHub CLI.
+
+ADDITIONAL PUBLISHING DOCUMENTATION COMMANDS
+
+git add README.md git_commands.txt evidence/github_integration.txt
+  Stage the verified publishing record and updated command documentation.
+
+git commit -m 'Record verified public GitHub integration'
+  Commit the verified integration record without changing earlier workflow history.
+
+PUBLISHING REPAIR INSPECTION COMMANDS
+
+git diff --cached --stat
+  Summarize the staged publishing documentation while diagnosing the interrupted final commit.
+
+git log -3 --oneline
+  Inspect the latest three commits before resuming the publishing record.

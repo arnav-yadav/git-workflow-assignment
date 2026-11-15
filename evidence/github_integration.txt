@@ -1,0 +1,65 @@
+GITHUB PUBLISHING EVIDENCE
+Snapshot after the first publish; the subsequent documentation commit is
+also pushed to main and final branch hashes are verified again for the PDF.
+
+$ git status --porcelain=v1
+
+[exit code: 0]
+
+$ git rev-parse main
+97293a81d756b86e2eb83b0e329a4b4875eb7be4
+[exit code: 0]
+
+$ git rev-parse feature
+8f33cae32161a4bc6ca9fbd3e00b2815fc42aa7b
+[exit code: 0]
+
+$ gh api user --jq .login
+arnav-yadav
+[exit code: 0]
+
+$ gh repo create arnav-yadav/git-workflow-assignment-20261115 --public --description 'Git workflow assignment and login-system test case design'
+https://github.com/arnav-yadav/git-workflow-assignment-20261115
+[exit code: 0]
+
+$ git remote add origin https://github.com/arnav-yadav/git-workflow-assignment-20261115.git
+
+[exit code: 0]
+
+$ git push -u origin main
+branch 'main' set up to track 'origin/main'.
+To https://github.com/arnav-yadav/git-workflow-assignment-20261115.git
+ * [new branch]      main -> main
+[exit code: 0]
+
+$ git push -u origin feature
+branch 'feature' set up to track 'origin/feature'.
+remote:
+remote: Create a pull request for 'feature' on GitHub by visiting:
+remote:      https://github.com/arnav-yadav/git-workflow-assignment-20261115/pull/new/feature
+remote:
+To https://github.com/arnav-yadav/git-workflow-assignment-20261115.git
+ * [new branch]      feature -> feature
+[exit code: 0]
+
+$ git remote -v
+origin	https://github.com/arnav-yadav/git-workflow-assignment-20261115.git (fetch)
+origin	https://github.com/arnav-yadav/git-workflow-assignment-20261115.git (push)
+[exit code: 0]
+
+$ git ls-remote --heads origin main feature
+8f33cae32161a4bc6ca9fbd3e00b2815fc42aa7b	refs/heads/feature
+97293a81d756b86e2eb83b0e329a4b4875eb7be4	refs/heads/main
+[exit code: 0]
+
+$ git rev-parse main
+97293a81d756b86e2eb83b0e329a4b4875eb7be4
+[exit code: 0]
+
+$ git rev-parse feature
+8f33cae32161a4bc6ca9fbd3e00b2815fc42aa7b
+[exit code: 0]
+
+$ gh repo view arnav-yadav/git-workflow-assignment-20261115 --json nameWithOwner,url,isPrivate,defaultBranchRef
+{"defaultBranchRef":{"name":"main"},"isPrivate":false,"nameWithOwner":"arnav-yadav/git-workflow-assignment-20261115","url":"https://github.com/arnav-yadav/git-workflow-assignment-20261115"}
+[exit code: 0]
